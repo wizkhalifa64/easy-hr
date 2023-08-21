@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 
 const Navbar = () => {
   return (
-    <nav className="shadow-md px-6 py-3">
+    <nav className="shadow-lg bg-orange-100 fixed top-0 left-0 w-full z-50 px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
         <h6 className="mr-4 cursor-pointer py-1.5 font-bold">Hr-Manual</h6>
 

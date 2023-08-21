@@ -72,7 +72,21 @@
   }
   body {
     @apply bg-background text-foreground;
-    margin: 0;
-    padding: 0;
   }
+}
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.main-class {
+  background: linear-gradient(45deg, #f1f5f5, #f8fff489, #d4f3f38a),
+    url(../../public/noting-points-with-pencil.svg);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+
+  background-size: 40% 100%;
 }

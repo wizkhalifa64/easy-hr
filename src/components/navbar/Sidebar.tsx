@@ -1,39 +1,61 @@
 import React from "react";
 import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
   UserCircleIcon,
-  Cog6ToothIcon,
-  InboxIcon,
-  PowerIcon,
   HomeIcon,
+  UserGroupIcon,
+  BuildingLibraryIcon,
 } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 const Sidebar = () => {
   const menuItems = [
+    { id: "1", href: "/", title: "Home", icon: <HomeIcon className="h-5" /> },
     {
-      href: "/",
-      title: "Homepage",
-      icon: <HomeIcon className="h-4" />,
-    },
-    {
+      id: "2",
       href: "/about",
-      title: "About",
-      icon: <HomeIcon className="h-4" />,
+      title: "Me",
+      icon: <UserCircleIcon className="h-5" />,
     },
     {
+      id: "3",
       href: "/contact",
-      title: "Contact",
-      icon: <HomeIcon className="h-4" />,
+      title: "My Team",
+      icon: <UserGroupIcon className="h-5" />,
+    },
+    {
+      id: "4",
+      href: "/contact",
+      title: "Org",
+      icon: <BuildingLibraryIcon className="h-5" />,
+    },
+    {
+      id: "5",
+      href: "/contact",
+      title: "Attendance",
+      icon: <BuildingLibraryIcon className="h-5" />,
+    },
+    {
+      id: "6",
+      href: "/contact",
+      title: "Leave",
+      icon: <BuildingLibraryIcon className="h-5" />,
+    },
+    {
+      id: "7",
+      href: "/contact",
+      title: "Payroll",
+      icon: <BuildingLibraryIcon className="h-5" />,
     },
   ];
   return (
-    <nav>
-      <ul>
-        {menuItems.map(({ href, title, icon }) => (
-          <li className="m-2" key={title}>
-            <Link href={href} className={`flex p-3 items-center gap-4`}>
+    <nav className="h-full pt-16 pb-4">
+      <ul className="flex flex-col items-center justify-between h-full">
+        {menuItems.map(({ id, href, title, icon }) => (
+          <li key={id}>
+            <Link
+              href={href}
+              className={`flex text-xs hover:bg-slate-700 font-semibold items-center flex-col gap-1`}
+            >
               {icon}
               {title}
             </Link>

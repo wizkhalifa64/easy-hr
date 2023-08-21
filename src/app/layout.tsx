@@ -22,11 +22,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <NProviders>
           <Navbar />
-          <div className="flex flex-col md:flex-row flex-1">
-            <aside className="bg-fuchsia-100 w-full md:w-60">
+          <div className="flex flex-col h-full md:flex-row flex-1">
+            <aside className="w-20 left-0 top-0  h-full pt-10 text-slate-100 bg-blue-950">
               <Sidebar />
             </aside>
-            <main className="flex-1">{children}</main>
+            <main className="main-class  h-full flex-1">{children}</main>
           </div>
         </NProviders>
       </body>
