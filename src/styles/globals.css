@@ -83,10 +83,8 @@ body {
   height: 100%;
 }
 .main-class {
-  background: linear-gradient(45deg, #f1f5f5, #f8fff489, #d4f3f38a),
-    url(../../public/noting-points-with-pencil.svg);
+  background-color: #f0f0f0;
   background-repeat: no-repeat;
   background-position: right bottom;
-
   background-size: 40% 100%;
 }
