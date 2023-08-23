@@ -4,21 +4,29 @@ export const ADD_ATTENDANCE = gql`
   mutation (
     $userid: String!
     $name: String!
-    $date: String!
-    $in: String
-    $out: String
+    $date: date!
+    $in: String!
+    $out: String!
   ) {
     insert_attendance_one(
       object: {
-        name: $name
-        date: $date
         intime: $in
         outtime: $out
         userId: $userid
+        name: $name
+        date: $date
       }
     ) {
       name
       userId
+    }
+  }
+`;
+export const MY_QUERY_QUERY = gql`
+  query MyQuery {
+    attendance {
+      name
+      intime
     }
   }
 `;

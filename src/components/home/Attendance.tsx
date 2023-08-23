@@ -1,21 +1,20 @@
 "use client";
 import React from "react";
 import { Button } from "../ui/button";
-import { useMutation } from "@apollo/client";
-import { ADD_ATTENDANCE } from "@/lib/query";
+import { useMutation, useQuery } from "@apollo/client";
+import { ADD_ATTENDANCE, MY_QUERY_QUERY } from "@/lib/query";
+import { useUserId } from "@nhost/nextjs";
+
 const Attendance = () => {
-  const [addAttendance, { loading }] = useMutation(ADD_ATTENDANCE);
+  const id = useUserId();
+
+  const { loading, error, data } = useQuery(MY_QUERY_QUERY, {
+    variables: { id },
+    skip: !id,
+  });
   const updateUserProfile = async () => {
     try {
-      await addAttendance({
-        variables: {
-          userId: "Susanta123",
-          name: "Susanta Das",
-          date: "2023-08-26",
-          intime: "09:45",
-          outtime: "19:10",
-        },
-      });
+      console.log(data);
       // toast.success('Updated successfully', { id: 'updateProfile' })
     } catch (error) {
       // toast.error('Unable to update profile', { id: 'updateProfile' })
