@@ -4,7 +4,10 @@ import {
   HomeIcon,
   UserGroupIcon,
   BuildingLibraryIcon,
-} from "@heroicons/react/24/solid";
+  CheckCircleIcon,
+  ClipboardIcon,
+  CurrencyRupeeIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -32,29 +35,29 @@ const Sidebar = () => {
       id: "5",
       href: "/contact",
       title: "Attendance",
-      icon: <BuildingLibraryIcon className="h-5" />,
+      icon: <ClipboardIcon className="h-5" />,
     },
     {
       id: "6",
       href: "/contact",
       title: "Leave",
-      icon: <BuildingLibraryIcon className="h-5" />,
+      icon: <CheckCircleIcon className="h-5" />,
     },
     {
       id: "7",
       href: "/contact",
       title: "Payroll",
-      icon: <BuildingLibraryIcon className="h-5" />,
+      icon: <CurrencyRupeeIcon className="h-5" />,
     },
   ];
   return (
-    <nav className="h-full pt-16 pb-4">
+    <nav className="h-full  pt-16 pb-4">
       <ul className="flex flex-col items-center justify-between h-full">
         {menuItems.map(({ id, href, title, icon }) => (
           <li key={id}>
             <Link
               href={href}
-              className={`flex text-xs hover:bg-slate-700 font-semibold items-center flex-col gap-1`}
+              className={`flex font-size-sm hover:bg-slate-700 font-semibold items-center flex-col gap-1`}
             >
               {icon}
               {title}

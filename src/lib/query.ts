@@ -1,32 +1,68 @@
 import { gql } from "@apollo/client";
 ///attendance
 export const ADD_ATTENDANCE = gql`
-  mutation (
-    $userid: String!
-    $name: String!
-    $date: date!
-    $in: String!
-    $out: String!
+  mutation InsertAttendance(
+    $date: date
+    $inTime: String
+    $outTime: String
+    $userId: uuid
   ) {
     insert_attendance_one(
       object: {
-        intime: $in
-        outtime: $out
-        userId: $userid
-        name: $name
+        user_id: $userId
         date: $date
+        in_time: $inTime
+        out_time: $outTime
       }
     ) {
-      name
-      userId
+      date
+      out_time
+      in_time
+      id
+      user_id
     }
   }
 `;
-export const MY_QUERY_QUERY = gql`
-  query MyQuery {
-    attendance {
-      name
-      intime
+
+export const GET_CURRENT_DATE_IN_TIME = gql`
+  query GetCurrentDateIn($date1: date, $date2: date, $userId: uuid) {
+    attendance(
+      where: { date: { _gte: $date1, _lte: $date2 }, user_id: { _eq: $userId } }
+      order_by: { date: desc }
+    ) {
+      date
+      in_time
+      out_time
+      avg_work_min
+    }
+  }
+`;
+export const UPDATE_OUT_TIME = gql`
+  mutation UpdateAttendence(
+    $userId: uuid
+    $date: date
+    $outTime: String
+    $avgWorkTime: bigint
+  ) {
+    update_attendance(
+      where: { user_id: { _eq: $userId }, date: { _eq: $date } }
+      _set: { out_time: $outTime, avg_work_min: $avgWorkTime }
+    ) {
+      returning {
+        out_time
+        in_time
+        date
+        avg_work_min
+      }
+    }
+  }
+`;
+export const GET_SINGLE_USER = gql`
+  query UserQuery($userId: uuid!) {
+    user(id: $userId) {
+      email
+      avatarUrl
+      metadata
     }
   }
 `;
