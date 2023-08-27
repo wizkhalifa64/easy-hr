@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -11,40 +12,36 @@ import {
 import SelectLeaveDateDialog from "./SelectLeaveDateDialog";
 
 const LeaveDetails = () => {
+  const [open, setOpen] = useState(false);
   return (
     <>
-      <SelectLeaveDateDialog />
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-sm">Leave Balance</CardTitle>
-        </CardHeader>
+      <SelectLeaveDateDialog open={open} setOpen={setOpen} />
+      <Card className="p-4">
+        <CardTitle className="text-sm">Leave Balance</CardTitle>
 
-        <CardContent className="grid grid-cols-2 gap-1">
+        <div className="grid py-2 grid-cols-2 gap-1">
           <div>
-            <h1 className="text-3xl  font-semibold text-blue-500">6.8</h1>
+            <h1 className="text-2xl  font-semibold text-blue-200">6.8</h1>
             <CardDescription className="font-size-sm">
               PAID LEAVES
             </CardDescription>
           </div>
           <div>
-            <h1 className="text-3xl font-semibold text-blue-500">60 %</h1>
+            <h1 className="text-2xl font-semibold text-blue-200">60%</h1>
             <CardDescription className="font-size-sm">
               SICK LEAVES
             </CardDescription>
           </div>
-        </CardContent>
-        <CardFooter className="flex items-center justify-between">
-          <div>
-            <strong>1:08 PM</strong>
-          </div>
+        </div>
+        <div className="flex items-center border-t justify-end">
           <Button
-            className="text-xs font-semibold bg-purple-100 text-purple-800"
+            className="text-xs text-purple-100"
             variant={"ghost"}
-            // onClick={updateUserProfile}
+            onClick={() => setOpen(true)}
           >
             Apply Leave
           </Button>
-        </CardFooter>
+        </div>
       </Card>
     </>
   );

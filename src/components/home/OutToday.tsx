@@ -7,35 +7,29 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import Image from "next/image";
 const OutToday = () => {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-sm">Attendance</CardTitle>
-      </CardHeader>
+    <Card className="p-3">
+      <CardTitle className="text-sm">Out Today</CardTitle>
 
-      <CardContent className="grid grid-cols-2 gap-1">
-        <div>
-          <h1 className="text-3xl  font-semibold text-blue-500">6.8</h1>
-          <small>AVG HOURS/DAY</small>
-        </div>
-        <div>
-          <h1 className="text-3xl font-semibold text-blue-500">60 %</h1>
-          <small>ONTIME ARRIVAL</small>
-        </div>
-      </CardContent>
-      <CardFooter className="flex items-center justify-between">
-        <div>
-          <strong>1:08 PM</strong>
-        </div>
-        <Button
-          className="text-xs font-semibold text-blue-400"
-          variant={"ghost"}
-          // onClick={updateUserProfile}
-        >
-          Clock-In
-        </Button>
-      </CardFooter>
+      <div className="py-2 flex items-center gap-2">
+        <Image
+          alt="name"
+          height={60}
+          width={60}
+          className="rounded-full"
+          src={"https://picsum.photos/200"}
+        />
+        <Image
+          alt="name"
+          height={60}
+          width={60}
+          className="rounded-full"
+          src={"https://picsum.photos/200"}
+        />
+      </div>
+      <div className="border-t"></div>
     </Card>
   );
 };

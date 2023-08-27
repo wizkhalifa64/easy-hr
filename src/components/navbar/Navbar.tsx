@@ -18,7 +18,7 @@ const Navbar = () => {
   const { data } = useQuery(GET_SINGLE_USER, { variables: { userId: id } });
   const { signOut } = useSignOut();
   return (
-    <nav className="shadow-md bg-slate-50 fixed top-0 left-0 w-full z-50 px-6 py-3">
+    <nav className="bg-slate-900 fixed top-0 border-b left-0 w-full z-50 px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
         <h6 className="mr-4 cursor-pointer py-1.5 font-bold">Hr-Manual</h6>
         <div className="flex items-center gap-2">

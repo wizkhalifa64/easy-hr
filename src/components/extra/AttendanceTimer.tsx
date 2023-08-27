@@ -25,9 +25,12 @@ const AttendanceTimer = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timer]);
   return (
-    <>
-      <strong>{timer.hour + " : " + timer.minute}</strong>
-    </>
+    <h3 className={"font-semibold text-blue-400"}>
+      {timer.hour}
+      <span className={"text-xs"}>H </span>
+      {timer.minute}
+      <span className={"text-xs"}>M</span>
+    </h3>
   );
 };
 

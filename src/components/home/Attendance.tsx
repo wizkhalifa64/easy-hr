@@ -107,7 +107,16 @@ const Attendance = () => {
   };
   const GetWorkingHours = ({ time }: { time: number }) => {
     const diff = getHM(time);
-    return <strong>{diff.hour + " : " + diff.minute}</strong>;
+    return (
+      <>
+        <h3 className={"font-semibold text-blue-400"}>
+          {diff.hour}
+          <span className={"text-xs"}>HH </span>
+          {diff.minute}
+          <span className={"text-xs"}>MM</span>
+        </h3>
+      </>
+    );
   };
   return (
     <>
@@ -118,15 +127,13 @@ const Attendance = () => {
         header="Are you sure?"
         desc="This action cannot be undone. Click continue to clock out."
       />
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-sm">Attendance</CardTitle>
-        </CardHeader>
+      <Card className="p-4">
+        <CardTitle className="text-sm">Attendance</CardTitle>
 
-        <CardContent className="grid grid-cols-2 gap-1">
+        <div className="grid py-2 grid-cols-2 gap-1">
           <div>
             {data?.attendance && (
-              <h1 className="text-2xl  font-semibold text-blue-500">
+              <h1 className="text-2xl  font-semibold text-blue-200">
                 {getAvgHour(data.attendance).hour
                   ? getAvgHour(data.attendance).hour
                   : 0}
@@ -139,13 +146,13 @@ const Attendance = () => {
             </CardDescription>
           </div>
           <div>
-            <h1 className="text-2xl font-semibold text-blue-500">60 %</h1>
+            <h1 className="text-2xl font-semibold text-blue-200">60 %</h1>
             <CardDescription className="font-size-sm">
               ONTIME ARRIVAL
             </CardDescription>
           </div>
-        </CardContent>
-        <CardFooter className="flex items-center justify-between">
+        </div>
+        <div className="flex items-center border-t justify-between">
           <>
             {data?.attendance[0]?.avg_work_min ? (
               <GetWorkingHours time={data?.attendance[0]?.avg_work_min} />
@@ -154,20 +161,21 @@ const Attendance = () => {
                 {data?.attendance[0]?.in_time ? (
                   <AttendanceTimer inTime={data?.attendance[0]?.in_time} />
                 ) : (
-                  <strong>0 : 0</strong>
+                  <h3>00H 00M</h3>
                 )}
               </>
             )}
           </>
 
           <Button
-            className="text-xs font-semibold "
+            className="text-xs"
             onClick={updateUserProfile}
+            variant={"ghost"}
             disabled={clockIn && Boolean(data?.attendance[0]?.out_time)}
           >
             {clockIn ? "Clock-In" : "Clock-Out"}
           </Button>
-        </CardFooter>
+        </div>
       </Card>
     </>
   );

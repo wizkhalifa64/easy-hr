@@ -27,7 +27,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 <>
                   <Navbar />
                   <div className="flex flex-col h-full md:flex-row flex-1">
-                    <aside className="w-20 fixed left-0 top-0  h-full pt-10 bg-blue-900 text-blue-200">
+                    <aside className="w-20 fixed left-0 top-0  h-full pt-10 bg-slate-900 text-blue-200">
                       <Sidebar />
                     </aside>
                     <main className="h-full pb-4 pt-20 ml-20 flex-1">
