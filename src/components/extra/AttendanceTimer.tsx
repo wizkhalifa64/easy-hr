@@ -4,19 +4,20 @@ type Props = {
   inTime: string;
 };
 const AttendanceTimer = (props: Props) => {
-  const [timer, setTimer] = useState({ hour: 0, minute: 0 });
+  const d = new Date().toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  });
+  const inTime = props.inTime;
+  const minDiff = getMinutesDiff(inTime, d);
+  const diffHM = getHM(minDiff);
+  const [timer, setTimer] = useState(
+    diffHM?.minute ? diffHM : { hour: 0, minute: 0 }
+  );
 
   useEffect(() => {
     const setTimerCount = setInterval(() => {
-      const d = new Date().toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: false,
-      });
-      const inTime = props.inTime;
-
-      const minDiff = getMinutesDiff(inTime, d);
-      const diffHM = getHM(minDiff);
       setTimer(diffHM);
     }, 60000);
     return () => {

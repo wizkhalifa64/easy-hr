@@ -10,7 +10,7 @@ import { MoonIcon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { useQuery } from "@apollo/client";
-import { GET_SINGLE_USER } from "@/lib/query";
+import { GET_SINGLE_USER } from "@/utils/query";
 import { useSignOut, useUserId } from "@nhost/nextjs";
 
 const Navbar = () => {

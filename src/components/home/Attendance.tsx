@@ -6,7 +6,7 @@ import {
   ADD_ATTENDANCE,
   GET_CURRENT_DATE_IN_TIME,
   UPDATE_OUT_TIME,
-} from "@/lib/query";
+} from "@/utils/query";
 import { useUserId } from "@nhost/nextjs";
 import {
   Card,
@@ -88,12 +88,31 @@ const Attendance = () => {
       setOpen(true);
     }
   };
+  const previousDay = data?.attendance[0].date
+    ? new Date(`${data.attendance[0]?.date}`)
+    : 0;
   const getQuery = () => {
-    if (data.attendance[0]?.in_time && data.attendance[0]?.out_time === null) {
-      setClockIn(false);
-    }
-    if (data.attendance[0]?.out_time) {
-      setClockIn(true);
+    // if (data.attendance[0]?.in_time && data.attendance[0]?.out_time === null) {
+    //   setClockIn(false);
+    // }
+    // if (data.attendance[0]?.out_time || (data.attendance[0]?.out_time && data.attendance[0]?.in_time )) {
+    //   setClockIn(true);
+    // }
+    switch (true) {
+      case data.attendance[0]?.in_time === null:
+        setClockIn(true);
+        break;
+      case data.attendance[0]?.out_time:
+        setClockIn(true);
+      case data.attendance[0]?.in_time && data.attendance[0]?.out_time === null:
+        setClockIn(false);
+        break;
+      case d > previousDay:
+        setClockIn(true);
+        break;
+      default:
+        setClockIn(true);
+        break;
     }
   };
   useEffect(() => {
@@ -102,9 +121,21 @@ const Attendance = () => {
   }, [loading]);
   const getAvgHour = (arr: any[]) => {
     const avgMin: any = arr.reduce((acc, c) => acc + c.avg_work_min, 0);
-    const avgH = getHM(avgMin);
+    const avgH = (avgMin / 60).toFixed(2);
     return avgH;
   };
+  const calculateOnTime = (arr: any[]) => {
+    const data: any = arr.reduce((acc, c) => {
+      if (new Date(`01/01/2010 10:00`) > new Date(`01/01/2000 ${c.in_time}`)) {
+        return acc + 1;
+      } else {
+        return acc - 1;
+      }
+    }, 0);
+    const percent = (100 / 5) * data;
+    return percent;
+  };
+
   const GetWorkingHours = ({ time }: { time: number }) => {
     const diff = getHM(time);
     return (
@@ -127,18 +158,14 @@ const Attendance = () => {
         header="Are you sure?"
         desc="This action cannot be undone. Click continue to clock out."
       />
-      <Card className="p-4">
-        <CardTitle className="text-sm">Attendance</CardTitle>
+      <div className="p-4 home-card-bg rounded-lg border">
+        <h3 className="text-sm font-bold">Attendance</h3>
 
         <div className="grid py-2 grid-cols-2 gap-1">
           <div>
             {data?.attendance && (
               <h1 className="text-2xl  font-semibold text-blue-200">
-                {getAvgHour(data.attendance).hour
-                  ? getAvgHour(data.attendance).hour
-                  : 0}
-                {"."}
-                {getAvgHour(data.attendance).minute}
+                {getAvgHour(data.attendance)}
               </h1>
             )}
             <CardDescription className="font-size-sm">
@@ -146,7 +173,9 @@ const Attendance = () => {
             </CardDescription>
           </div>
           <div>
-            <h1 className="text-2xl font-semibold text-blue-200">60 %</h1>
+            <h1 className="text-2xl font-semibold text-blue-200">
+              {data?.attendance ? calculateOnTime(data.attendance) : "00"}%
+            </h1>
             <CardDescription className="font-size-sm">
               ONTIME ARRIVAL
             </CardDescription>
@@ -154,7 +183,9 @@ const Attendance = () => {
         </div>
         <div className="flex items-center border-t justify-between">
           <>
-            {data?.attendance[0]?.avg_work_min ? (
+            {d > previousDay ? (
+              <h3>00H 00M</h3>
+            ) : data?.attendance[0]?.avg_work_min ? (
               <GetWorkingHours time={data?.attendance[0]?.avg_work_min} />
             ) : (
               <>
@@ -171,12 +202,16 @@ const Attendance = () => {
             className="text-xs"
             onClick={updateUserProfile}
             variant={"ghost"}
-            disabled={clockIn && Boolean(data?.attendance[0]?.out_time)}
+            disabled={
+              d > previousDay
+                ? false
+                : clockIn && Boolean(data?.attendance[0]?.out_time)
+            }
           >
             {clockIn ? "Clock-In" : "Clock-Out"}
           </Button>
         </div>
-      </Card>
+      </div>
     </>
   );
 };

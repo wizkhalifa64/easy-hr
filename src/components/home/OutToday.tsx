@@ -10,8 +10,8 @@ import {
 import Image from "next/image";
 const OutToday = () => {
   return (
-    <Card className="p-3">
-      <CardTitle className="text-sm">Out Today</CardTitle>
+    <div className="p-4">
+      <h3 className="text-sm font-semibold">Out Today</h3>
 
       <div className="py-2 flex items-center gap-2">
         <Image
@@ -30,7 +30,7 @@ const OutToday = () => {
         />
       </div>
       <div className="border-t"></div>
-    </Card>
+    </div>
   );
 };
 
