@@ -18,7 +18,15 @@ const AttendanceTimer = (props: Props) => {
 
   useEffect(() => {
     const setTimerCount = setInterval(() => {
-      setTimer(diffHM);
+      const d1 = new Date().toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: false,
+      });
+      const inTime1 = props.inTime;
+      const minDiff1 = getMinutesDiff(inTime1, d1);
+      const diffHM1 = getHM(minDiff1);
+      setTimer(diffHM1);
     }, 60000);
     return () => {
       clearInterval(setTimerCount);
