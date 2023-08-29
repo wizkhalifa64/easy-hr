@@ -89,7 +89,7 @@ const Attendance = () => {
     }
   };
   const previousDay = data?.attendance[0].date
-    ? new Date(`${data.attendance[0]?.date}`)
+    ? new Date(`${data.attendance[0]?.date}`).toDateString()
     : 0;
   const getQuery = () => {
     // if (data.attendance[0]?.in_time && data.attendance[0]?.out_time === null) {
@@ -107,7 +107,7 @@ const Attendance = () => {
       case data.attendance[0]?.in_time && data.attendance[0]?.out_time === null:
         setClockIn(false);
         break;
-      case d > previousDay:
+      case d.toDateString() > previousDay:
         setClockIn(true);
         break;
       default:
@@ -183,7 +183,7 @@ const Attendance = () => {
         </div>
         <div className="flex items-center border-t justify-between">
           <>
-            {d > previousDay ? (
+            {d.toDateString() > previousDay ? (
               <h3>00H 00M</h3>
             ) : data?.attendance[0]?.avg_work_min ? (
               <GetWorkingHours time={data?.attendance[0]?.avg_work_min} />
@@ -203,7 +203,7 @@ const Attendance = () => {
             onClick={updateUserProfile}
             variant={"ghost"}
             disabled={
-              d > previousDay
+              d.toDateString() > previousDay
                 ? false
                 : clockIn && Boolean(data?.attendance[0]?.out_time)
             }
