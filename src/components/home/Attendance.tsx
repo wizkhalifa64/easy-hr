@@ -88,7 +88,7 @@ const Attendance = () => {
       setOpen(true);
     }
   };
-  const previousDay = data?.attendance[0].date
+  const previousDay = data?.attendance[0]?.date
     ? new Date(`${data.attendance[0]?.date}`).toDateString()
     : 0;
   const getQuery = () => {
