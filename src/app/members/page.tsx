@@ -8,7 +8,7 @@ type Payment = {
   email: string;
 };
 
-export const payments: Payment[] = [
+const payments: Payment[] = [
   {
     id: "728ed52f",
     amount: 100,
