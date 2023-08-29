@@ -2,7 +2,7 @@
 import { GET_SINGLE_USER } from "@/utils/query";
 import { useQuery } from "@apollo/client";
 import { useUserId } from "@nhost/nextjs";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Card, CardContent, CardDescription, CardHeader } from "../ui/card";
 import Image from "next/image";
 
 const UserCard = () => {
@@ -11,7 +11,7 @@ const UserCard = () => {
     variables: { userId: id },
   });
   return (
-    <div className="flex items-center gap-2">
+    <Card className="flex p-3 items-center gap-2">
       <Image
         src={"https://picsum.photos/200"}
         alt="profile"
@@ -19,11 +19,14 @@ const UserCard = () => {
         width={150}
         className="rounded-lg"
       />
-      <Card>
-        <CardHeader></CardHeader>
+      <div>
+        <CardHeader className={"text-xl font-semibold"}>
+          {data?.user.metadata.firstName + " " + data?.user.metadata.lastName}
+        </CardHeader>
+        <CardDescription></CardDescription>
         <CardContent></CardContent>
-      </Card>
-    </div>
+      </div>
+    </Card>
   );
 };
 

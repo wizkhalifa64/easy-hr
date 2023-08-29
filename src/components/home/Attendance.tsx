@@ -121,7 +121,8 @@ const Attendance = () => {
   }, [loading]);
   const getAvgHour = (arr: any[]) => {
     const avgMin: any = arr.reduce((acc, c) => acc + c.avg_work_min, 0);
-    const avgH = (avgMin / 60).toFixed(2);
+    const length = arr.length === 0 ? 1 : arr.length;
+    const avgH = (avgMin / (60 * length)).toFixed(1);
     return avgH;
   };
   const calculateOnTime = (arr: any[]) => {
@@ -129,13 +130,13 @@ const Attendance = () => {
       if (new Date(`01/01/2010 10:00`) > new Date(`01/01/2000 ${c.in_time}`)) {
         return acc + 1;
       } else {
-        return acc - 1;
+        return acc;
       }
     }, 0);
-    const percent = (100 / 5) * data;
+    const length = arr.length === 0 ? 1 : arr.length;
+    const percent = (100 / length) * data;
     return percent;
   };
-
   const GetWorkingHours = ({ time }: { time: number }) => {
     const diff = getHM(time);
     return (

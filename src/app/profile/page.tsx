@@ -2,7 +2,7 @@ import UserCard from "@/components/profile/UserCard";
 
 const Profile = () => {
   return (
-    <div className="container">
+    <div className="container pt-3">
       <UserCard />
     </div>
   );

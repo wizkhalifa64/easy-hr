@@ -168,3 +168,8 @@ body {
 .home-card-bg {
   background-color: #0d1c2b;
 }
+.auth-container {
+  background-image: url("../../public/auth/bg2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

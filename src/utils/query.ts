@@ -27,6 +27,7 @@ export const ADD_ATTENDANCE = gql`
 export const GET_CURRENT_DATE_IN_TIME = gql`
   query GetCurrentDateIn($date1: date, $date2: date, $userId: uuid) {
     attendance(
+      limit: 7
       where: { date: { _gte: $date1, _lte: $date2 }, user_id: { _eq: $userId } }
       order_by: { date: desc }
     ) {

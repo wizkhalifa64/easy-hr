@@ -34,7 +34,7 @@ const SignIn = () => {
       router.push("/");
       return null;
     } else {
-      isError && toast(error?.message);
+      isError && toast.error(error?.message);
     }
   };
   return (

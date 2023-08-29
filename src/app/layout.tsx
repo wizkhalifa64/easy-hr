@@ -19,8 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ToastContainer />
         <NProviders>{children}</NProviders>
+        <ToastContainer theme={"dark"} />
       </body>
     </html>
   );

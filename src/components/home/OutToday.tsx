@@ -1,16 +1,8 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
 import Image from "next/image";
 const OutToday = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 home-card-bg rounded-lg border">
       <h3 className="text-sm font-semibold">Out Today</h3>
 
       <div className="py-2 flex items-center gap-2">

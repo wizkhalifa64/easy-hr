@@ -22,7 +22,7 @@ const Sidebar = () => {
     },
     {
       id: "3",
-      href: "/contact",
+      href: "/members",
       title: "My Team",
       icon: <UserGroupIcon className="h-5" />,
     },
