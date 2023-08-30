@@ -122,12 +122,12 @@ const Attendance = () => {
   const getAvgHour = (arr: any[]) => {
     const avgMin: any = arr.reduce((acc, c) => acc + c.avg_work_min, 0);
     const length = arr.length === 0 ? 1 : arr.length;
-    const avgH = (avgMin / (60 * length)).toFixed(1);
+    const avgH = (avgMin / (60 * length)).toFixed();
     return avgH;
   };
   const calculateOnTime = (arr: any[]) => {
     const data: any = arr.reduce((acc, c) => {
-      if (new Date(`01/01/2010 10:00`) > new Date(`01/01/2000 ${c.in_time}`)) {
+      if (new Date(`01/01/2010 10:00`) > new Date(`01/01/2010 ${c.in_time}`)) {
         return acc + 1;
       } else {
         return acc;

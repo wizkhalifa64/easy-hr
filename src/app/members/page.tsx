@@ -1,4 +1,5 @@
 import DataTableComponent from "@/components/members/DataTableComponent";
+import TopBar from "@/components/members/TopBar";
 import { columns } from "@/components/members/columns";
 import React from "react";
 type Payment = {
@@ -27,6 +28,7 @@ const payments: Payment[] = [
 const Members = () => {
   return (
     <div className="container  pt-4">
+      <TopBar />
       <DataTableComponent columns={columns} data={payments} />
     </div>
   );

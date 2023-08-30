@@ -67,3 +67,34 @@ export const GET_SINGLE_USER = gql`
     }
   }
 `;
+export const GET_ALL_USER = gql`
+  query GetAllUser {
+    users {
+      id
+      metadata
+    }
+  }
+`;
+export const ADD_EMPLOYEE = gql`
+  mutation MyMutation(
+    $userId: uuid
+    $bloodGroup: String
+    $designation: String
+    $dob: date
+    $age: Int
+    $reportingManeger: uuid
+  ) {
+    insert_employee_details_one(
+      object: {
+        user_id: $userId
+        blood_group: $bloodGroup
+        designation: $designation
+        age: $age
+        reporting_maneger: $reportingManeger
+        dob: $dob
+      }
+    ) {
+      designation
+    }
+  }
+`;
