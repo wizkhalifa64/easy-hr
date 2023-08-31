@@ -184,7 +184,7 @@ const Attendance = () => {
         </div>
         <div className="flex items-center border-t justify-between">
           <>
-            {d > previousDay ? (
+            {(d > previousDay && !Boolean(data?.attendance[0]?.in_time)) ? (
               <h3>00H 00M</h3>
             ) : data?.attendance[0]?.avg_work_min ? (
               <GetWorkingHours time={data?.attendance[0]?.avg_work_min} />
