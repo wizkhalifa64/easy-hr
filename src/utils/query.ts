@@ -98,3 +98,10 @@ export const ADD_EMPLOYEE = gql`
     }
   }
 `;
+export const GET_USER_ROLe = gql`
+  query MyQuery($userId) {
+    user(id: $userId) {
+      defaultRole
+    }
+  }
+`;

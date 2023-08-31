@@ -28,7 +28,7 @@ import {
   Form,
 } from "../ui/form";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_EMPLOYEE, GET_ALL_USER } from "@/utils/query";
+import { ADD_EMPLOYEE, GET_ALL_USER, GET_USER_ROLe } from "@/utils/query";
 import { LoaderIcon } from "lucide-react";
 
 type Inputs = {
@@ -42,6 +42,7 @@ type Inputs = {
 
 const TopBar = () => {
   const { loading, data, error } = useQuery(GET_ALL_USER);
+  const { data: roleData } = useQuery(GET_USER_ROLe);
   const [addEmployee, { loading: addEmLoading }] = useMutation(ADD_EMPLOYEE);
   const form = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -56,12 +57,14 @@ const TopBar = () => {
   return (
     <div className="flex items-center justify-end pb-5">
       <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="outline">
-            <PlusIcon className="h-4 mr-2" />
-            Add Teammate
-          </Button>
-        </DialogTrigger>
+        {roleData?.user?.defaultRole === "HR" && (
+          <DialogTrigger asChild>
+            <Button variant="outline">
+              <PlusIcon className="h-4 mr-2" />
+              Add Teammate
+            </Button>
+          </DialogTrigger>
+        )}
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader className="py-3">
             <DialogTitle>Edit Team</DialogTitle>

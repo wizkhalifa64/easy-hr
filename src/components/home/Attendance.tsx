@@ -89,7 +89,7 @@ const Attendance = () => {
     }
   };
   const previousDay = data?.attendance[0]?.date
-    ? new Date(`${data.attendance[0]?.date}`)
+    ? new Date(`${data.attendance[0]?.date} 00:00`).getTime()
     : 0;
   const getQuery = () => {
     // if (data.attendance[0]?.in_time && data.attendance[0]?.out_time === null) {
@@ -107,7 +107,8 @@ const Attendance = () => {
       case data.attendance[0]?.in_time && data.attendance[0]?.out_time === null:
         setClockIn(false);
         break;
-      case d > previousDay:
+      case new Date(`${d.toLocaleDateString("en-CA")} 00:00`).getTime() >
+        previousDay:
         setClockIn(true);
         break;
       default:
@@ -122,7 +123,7 @@ const Attendance = () => {
   const getAvgHour = (arr: any[]) => {
     const avgMin: any = arr.reduce((acc, c) => acc + c.avg_work_min, 0);
     const length = arr.length === 0 ? 1 : arr.length;
-    const avgH = (avgMin / (60 * length)).toFixed();
+    const avgH = (avgMin / (60 * length)).toFixed(1);
     return avgH;
   };
   const calculateOnTime = (arr: any[]) => {
@@ -150,6 +151,7 @@ const Attendance = () => {
       </>
     );
   };
+
   return (
     <>
       <AlertModal
@@ -184,7 +186,8 @@ const Attendance = () => {
         </div>
         <div className="flex items-center border-t justify-between">
           <>
-            {(d > previousDay && !Boolean(data?.attendance[0]?.in_time)) ? (
+            {new Date(`${d.toLocaleDateString("en-CA")} 00:00`).getTime() >
+              previousDay && !Boolean(data?.attendance[0]?.in_time) ? (
               <h3>00H 00M</h3>
             ) : data?.attendance[0]?.avg_work_min ? (
               <GetWorkingHours time={data?.attendance[0]?.avg_work_min} />
@@ -204,7 +207,8 @@ const Attendance = () => {
             onClick={updateUserProfile}
             variant={"ghost"}
             disabled={
-              d > previousDay
+              new Date(`${d.toLocaleDateString("en-CA")} 00:00`).getTime() >
+              previousDay
                 ? false
                 : clockIn && Boolean(data?.attendance[0]?.out_time)
             }
