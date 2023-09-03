@@ -104,7 +104,10 @@ const Attendance = () => {
         break;
       case data.attendance[0]?.out_time:
         setClockIn(true);
-      case data.attendance[0]?.in_time && data.attendance[0]?.out_time === null:
+      case new Date(`${d.toLocaleDateString("en-CA")} 00:00`).getTime() ===
+        previousDay &&
+        data.attendance[0]?.in_time &&
+        data.attendance[0]?.out_time === null:
         setClockIn(false);
         break;
       case new Date(`${d.toLocaleDateString("en-CA")} 00:00`).getTime() >
@@ -116,6 +119,7 @@ const Attendance = () => {
         break;
     }
   };
+  // console.log(clockIn);
   useEffect(() => {
     !loading && data && getQuery();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -187,7 +191,7 @@ const Attendance = () => {
         <div className="flex items-center border-t justify-between">
           <>
             {new Date(`${d.toLocaleDateString("en-CA")} 00:00`).getTime() >
-              previousDay && !Boolean(data?.attendance[0]?.in_time) ? (
+            previousDay ? (
               <h3>00H 00M</h3>
             ) : data?.attendance[0]?.avg_work_min ? (
               <GetWorkingHours time={data?.attendance[0]?.avg_work_min} />
@@ -210,7 +214,8 @@ const Attendance = () => {
               new Date(`${d.toLocaleDateString("en-CA")} 00:00`).getTime() >
               previousDay
                 ? false
-                : clockIn && Boolean(data?.attendance[0]?.out_time)
+                : clockIn &&
+                  Boolean(data?.attendance[0]?.out_time ? true : false)
             }
           >
             {clockIn ? "Clock-In" : "Clock-Out"}

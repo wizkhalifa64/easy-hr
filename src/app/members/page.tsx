@@ -1,14 +1,18 @@
 import DataTableComponent from "@/components/members/DataTableComponent";
 import TopBar from "@/components/members/TopBar";
 import { columns } from "@/components/members/columns";
-import React from "react";
 type Payment = {
   id: string;
   amount: number;
   status: "pending" | "processing" | "success" | "failed";
   email: string;
 };
-
+type User = {
+  userId: string;
+  name: string;
+  email: string;
+  designation: string;
+};
 const payments: Payment[] = [
   {
     id: "728ed52f",

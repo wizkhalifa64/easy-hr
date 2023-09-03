@@ -15,10 +15,10 @@ import {
   TableRow,
 } from "../ui/table";
 
-interface DataTableProps<TData, TValue> {
+type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-}
+};
 
 export default function DataTableComponent<TData, TValue>({
   columns,
@@ -32,7 +32,7 @@ export default function DataTableComponent<TData, TValue>({
 
   return (
     <div className="rounded-md border">
-      <Table>
+      {/* <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -73,7 +73,7 @@ export default function DataTableComponent<TData, TValue>({
             </TableRow>
           )}
         </TableBody>
-      </Table>
+      </Table> */}
     </div>
   );
 }

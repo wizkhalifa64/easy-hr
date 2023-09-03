@@ -26,30 +26,30 @@ const Sidebar = () => {
       title: "My Team",
       icon: <UserGroupIcon className="h-5" />,
     },
-    {
-      id: "4",
-      href: "/contact",
-      title: "Org",
-      icon: <BuildingLibraryIcon className="h-5" />,
-    },
-    {
-      id: "5",
-      href: "/contact",
-      title: "Attendance",
-      icon: <ClipboardIcon className="h-5" />,
-    },
-    {
-      id: "6",
-      href: "/contact",
-      title: "Leave",
-      icon: <CheckCircleIcon className="h-5" />,
-    },
-    {
-      id: "7",
-      href: "/contact",
-      title: "Payroll",
-      icon: <CurrencyRupeeIcon className="h-5" />,
-    },
+    // {
+    //   id: "4",
+    //   href: "/members",
+    //   title: "Org",
+    //   icon: <BuildingLibraryIcon className="h-5" />,
+    // },
+    // {
+    //   id: "5",
+    //   href: "/members",
+    //   title: "Attendance",
+    //   icon: <ClipboardIcon className="h-5" />,
+    // },
+    // {
+    //   id: "6",
+    //   href: "/members",
+    //   title: "Leave",
+    //   icon: <CheckCircleIcon className="h-5" />,
+    // },
+    // {
+    //   id: "7",
+    //   href: "/members",
+    //   title: "Payroll",
+    //   icon: <CurrencyRupeeIcon className="h-5" />,
+    // },
   ];
   return (
     <nav className="h-full  pt-5 overflow-y-auto ">
@@ -57,12 +57,13 @@ const Sidebar = () => {
         {menuItems.map(({ id, href, title, icon }) => (
           <li
             className={`m-0 py-4 ${
-              pathName === href ? "bg-blue-800" : ""
+              pathName === href && "bg-blue-800"
             } hover:bg-slate-700`}
             key={id}
           >
             <Link
               href={href}
+              as={href}
               className={`flex font-size-sm font-semibold items-center flex-col gap-1`}
             >
               {icon}

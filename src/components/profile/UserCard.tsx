@@ -1,15 +1,12 @@
 "use client";
 import { GET_SINGLE_USER } from "@/utils/query";
 import { useQuery } from "@apollo/client";
-import { useUserId } from "@nhost/nextjs";
+import { useUserDisplayName, useUserId } from "@nhost/nextjs";
 import { Card, CardContent, CardDescription, CardHeader } from "../ui/card";
 import Image from "next/image";
 
 const UserCard = () => {
-  const id = useUserId();
-  const { data, loading } = useQuery(GET_SINGLE_USER, {
-    variables: { userId: id },
-  });
+  const displayName = useUserDisplayName();
   return (
     <Card className="flex p-3 items-center gap-2">
       <Image
@@ -21,7 +18,7 @@ const UserCard = () => {
       />
       <div>
         <CardHeader className={"text-xl font-semibold"}>
-          {data?.user.metadata.firstName + " " + data?.user.metadata.lastName}
+          {displayName}
         </CardHeader>
         <CardDescription></CardDescription>
         <CardContent></CardContent>

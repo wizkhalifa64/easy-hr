@@ -79,9 +79,8 @@ export const ADD_EMPLOYEE = gql`
   mutation MyMutation(
     $userId: uuid
     $bloodGroup: String
-    $designation: String
+    $designation: Int
     $dob: date
-    $age: Int
     $reportingManeger: uuid
   ) {
     insert_employee_details_one(
@@ -89,7 +88,6 @@ export const ADD_EMPLOYEE = gql`
         user_id: $userId
         blood_group: $bloodGroup
         designation: $designation
-        age: $age
         reporting_maneger: $reportingManeger
         dob: $dob
       }
@@ -98,10 +96,25 @@ export const ADD_EMPLOYEE = gql`
     }
   }
 `;
-export const GET_USER_ROLe = gql`
-  query MyQuery($userId) {
-    user(id: $userId) {
-      defaultRole
+export const GET_DESIGNATION = gql`
+  query GetAttendance {
+    designation {
+      id
+      value
+    }
+  }
+`;
+export const APPLY_LEAVE = gql`
+  mutation ApplyLeave(
+    $userId: uuid
+    $date: date
+    $reason: String
+    $type: String
+  ) {
+    insert_leave(
+      objects: { date: $date, userId: $userId, reason: $reason, type: $type }
+    ) {
+      affected_rows
     }
   }
 `;
