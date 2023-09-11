@@ -36,6 +36,15 @@ export const GET_CURRENT_DATE_IN_TIME = gql`
       out_time
       avg_work_min
     }
+    attendance_aggregate(
+      where: { date: { _gte: $date1, _lte: $date2 }, user_id: { _eq: $userId } }
+    ) {
+      aggregate {
+        avg {
+          avg_work_min
+        }
+      }
+    }
   }
 `;
 export const UPDATE_OUT_TIME = gql`

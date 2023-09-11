@@ -14,6 +14,7 @@ import {
   useUserAvatarUrl,
   useUserDisplayName,
 } from "@nhost/nextjs";
+import Link from "next/link";
 
 const Navbar = () => {
   const user = useUserDisplayName();
@@ -34,7 +35,11 @@ const Navbar = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>Profile</DropdownMenuLabel>
+              <DropdownMenuLabel>
+                <Link href={"/profile"} as={"/profile"}>
+                  Profile
+                </Link>
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuLabel>
                 Log Out

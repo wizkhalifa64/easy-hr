@@ -18,7 +18,6 @@ import {
 } from "../ui/card";
 import { AlertModal } from "../Alert";
 import { getHM, getMinutesDiff, getMonday } from "@/utils";
-import { produce } from "immer";
 import AttendanceTimer from "../extra/AttendanceTimer";
 const Attendance = () => {
   const id = useUserId();
@@ -46,6 +45,7 @@ const Attendance = () => {
         hour: "numeric",
         minute: "numeric",
         hour12: false,
+        hourCycle: "h23",
       });
       const inTime = data.attendance[0]?.in_time;
       if (!inTime) {
@@ -74,6 +74,7 @@ const Attendance = () => {
               hour: "numeric",
               minute: "numeric",
               hour12: false,
+              hourCycle: "h23",
             })}`,
             userId: id,
           },
@@ -124,12 +125,7 @@ const Attendance = () => {
     !loading && data && getQuery();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
-  const getAvgHour = (arr: any[]) => {
-    const avgMin: any = arr.reduce((acc, c) => acc + c.avg_work_min, 0);
-    const length = arr.length === 0 ? 1 : arr.length;
-    const avgH = (avgMin / (60 * length)).toFixed(1);
-    return avgH;
-  };
+
   const calculateOnTime = (arr: any[]) => {
     const data: any = arr.reduce((acc, c) => {
       if (new Date(`01/01/2010 10:00`) > new Date(`01/01/2010 ${c.in_time}`)) {
@@ -170,25 +166,29 @@ const Attendance = () => {
 
         <div className="grid py-2 grid-cols-2 gap-1">
           <div>
-            {data?.attendance && (
-              <h1 className="text-2xl  font-semibold text-blue-200">
-                {getAvgHour(data.attendance)}
-              </h1>
-            )}
+            <h1 className="text-2xl  font-semibold text-blue-200">
+              {(
+                data?.attendance_aggregate.aggregate.avg.avg_work_min / 60
+              ).toFixed(1)}
+            </h1>
+
             <CardDescription className="font-size-sm">
               AVG HOURS/DAY
             </CardDescription>
           </div>
           <div>
             <h1 className="text-2xl font-semibold text-blue-200">
-              {data?.attendance ? calculateOnTime(data.attendance) : "00"}%
+              {data?.attendance
+                ? calculateOnTime(data.attendance).toFixed()
+                : "00"}
+              %
             </h1>
             <CardDescription className="font-size-sm">
               ONTIME ARRIVAL
             </CardDescription>
           </div>
         </div>
-        <div className="flex items-center border-t justify-between">
+        <div className="flex items-center border-t pt-1 justify-between">
           <>
             {new Date(`${d.toLocaleDateString("en-CA")} 00:00`).getTime() >
             previousDay ? (
