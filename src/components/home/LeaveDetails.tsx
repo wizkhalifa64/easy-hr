@@ -16,8 +16,10 @@ const LeaveDetails = () => {
   return (
     <>
       <SelectLeaveDateDialog open={open} setOpen={setOpen} />
-      <div className="p-4 home-card-bg rounded-lg border">
-        <h3 className="text-sm font-semibold">Leave Balance</h3>
+      <div className="p-4 home-card-bg">
+        <h3 className="text-sm font-bold border-l-4 border-indigo-500 pl-1">
+          Leave Balance
+        </h3>
 
         <div className="grid py-2 grid-cols-2 gap-1">
           <div>

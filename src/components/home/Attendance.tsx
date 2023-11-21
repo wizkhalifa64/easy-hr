@@ -161,8 +161,10 @@ const Attendance = () => {
         header="Are you sure?"
         desc="This action cannot be undone. Click continue to clock out."
       />
-      <div className="p-4 home-card-bg rounded-lg border">
-        <h3 className="text-sm font-bold">Attendance</h3>
+      <div className="p-4 home-card-bg">
+        <h3 className="text-sm border-l-4 border-red-500 font-bold pl-1">
+          Attendance
+        </h3>
 
         <div className="grid py-2 grid-cols-2 gap-1">
           <div>
@@ -188,7 +190,7 @@ const Attendance = () => {
             </CardDescription>
           </div>
         </div>
-        <div className="flex items-center border-t pt-1 justify-between">
+        <div className="flex items-center pt-1 justify-between">
           <>
             {new Date(`${d.toLocaleDateString("en-CA")} 00:00`).getTime() >
             previousDay ? (

@@ -57,7 +57,7 @@ const Sidebar = () => {
         {menuItems.map(({ id, href, title, icon }) => (
           <li
             className={`m-0 py-4 ${
-              pathName === href && "bg-blue-800"
+              pathName === href && "bg-[#3d4787]"
             } hover:bg-slate-700`}
             key={id}
           >

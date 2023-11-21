@@ -27,7 +27,7 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 224 15% 14%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -165,7 +165,7 @@ body {
 }
 
 .home-card-bg {
-  background-color: #0d1c2b;
+  background-color: #2d313d;
 }
 .auth-container {
   background-image: linear-gradient(351deg, #06194a 5%, #00050d 24%);
